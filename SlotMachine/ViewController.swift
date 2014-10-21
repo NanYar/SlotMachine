@@ -9,6 +9,14 @@
 import UIKit
 
 class ViewController: UIViewController {
+    
+    var firstContainer: UIView!
+    var secondContainer: UIView!
+    var thirdContainer: UIView!
+    var fourthContainer: UIView!
+    
+    let kMarginForView: CGFloat = 10.0
+    let kSixth: CGFloat = 1.0 / 6.0
 
     override func viewDidLoad() {
         super.viewDidLoad()
