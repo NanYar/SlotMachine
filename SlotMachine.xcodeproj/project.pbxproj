@@ -14,6 +14,7 @@
 		175CD9FB19F7064200F00AB9 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 175CD9F919F7064200F00AB9 /* LaunchScreen.xib */; };
 		175CDA0719F7064200F00AB9 /* SlotMachineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 175CDA0619F7064200F00AB9 /* SlotMachineTests.swift */; };
 		175DEBFD19F99DEA0001EDAA /* Slot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 175DEBFC19F99DEA0001EDAA /* Slot.swift */; };
+		17DC6C6B19FA8FAD001D25EF /* Factory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17DC6C6A19FA8FAD001D25EF /* Factory.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,6 +39,7 @@
 		175CDA0519F7064200F00AB9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		175CDA0619F7064200F00AB9 /* SlotMachineTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlotMachineTests.swift; sourceTree = "<group>"; };
 		175DEBFC19F99DEA0001EDAA /* Slot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Slot.swift; sourceTree = "<group>"; };
+		17DC6C6A19FA8FAD001D25EF /* Factory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Factory.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,6 +83,7 @@
 			children = (
 				175CD9F019F7064200F00AB9 /* AppDelegate.swift */,
 				175CD9F219F7064200F00AB9 /* ViewController.swift */,
+				17DC6C6A19FA8FAD001D25EF /* Factory.swift */,
 				175DEBFC19F99DEA0001EDAA /* Slot.swift */,
 				175CD9F419F7064200F00AB9 /* Main.storyboard */,
 				175CD9F719F7064200F00AB9 /* Images.xcassets */,
@@ -215,6 +218,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				17DC6C6B19FA8FAD001D25EF /* Factory.swift in Sources */,
 				175CD9F319F7064200F00AB9 /* ViewController.swift in Sources */,
 				175DEBFD19F99DEA0001EDAA /* Slot.swift in Sources */,
 				175CD9F119F7064200F00AB9 /* AppDelegate.swift in Sources */,
