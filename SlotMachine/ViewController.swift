@@ -33,6 +33,11 @@ class ViewController: UIViewController
     
     var slots: [[Slot]] = []
     
+    // Stats:
+    var credits = 0
+    var currentBet = 0
+    var winnings = 0
+    
     let kMarginForView: CGFloat = 10.0
     let kMarginForSlot: CGFloat = 2.0
     let kSixth: CGFloat = 1.0 / 6.0
@@ -49,13 +54,9 @@ class ViewController: UIViewController
         super.viewDidLoad()
         setupContainerViews()
         setupFirstContainer(firstContainer)
-        setupSecondContainer(secondContainer)
         setupThirdContainer(thirdContainer)
         setupFourthContainer(fourthContainer)
-//        println(firstContainer.frame.height)
-//        println(secondContainer.frame.height)
-//        println(thirdContainer.frame.height)
-//        println(fourthContainer.frame.height)
+        hardReset() // sets up also secondContainer
     }
 
     override func didReceiveMemoryWarning()
@@ -65,20 +66,52 @@ class ViewController: UIViewController
     
     
     // IBActions
-    
     func resetButtonPressed(button: UIButton)
     {
-        println("resetButtonPressed")
+        hardReset()
     }
     
     func betOneButtonPressed(button: UIButton)
     {
-        println("betOneButtonPressed")
+        if credits <= 0
+        {
+            showAlertWithText(header: "No More Credits", message: "Reset Game")
+        }
+        else
+        {
+            if currentBet < 5
+            {
+                currentBet += 1
+                credits -= 1
+                updateMainView()
+            }
+            else
+            {
+                showAlertWithText(message: "You can only bet 5 credits at a time!")
+            }
+        }
     }
     
     func betMaxButtonPressed(button: UIButton)
     {
-        println("betMaxButtonPressed")
+        if credits < 5
+        {
+            showAlertWithText(header: "Not Enought Credits", message: "Bet less!")
+        }
+        else
+        {
+            if currentBet < 5
+            {
+                var creditsToBetMax = 5 - currentBet
+                credits -= creditsToBetMax
+                currentBet += creditsToBetMax
+                updateMainView()
+            }
+            else
+            {
+                showAlertWithText(message: "You can only bet 5 credits at a time!")
+            }
+        }
     }
     
     func spinButtonPressed(button: UIButton)
@@ -86,6 +119,12 @@ class ViewController: UIViewController
         removeSlotImageViews()
         slots = Factory.createSlots()
         setupSecondContainer(secondContainer)
+        
+        var winningsMultiplier = SlotBrain.computeWinnings(slots)
+        winnings = winningsMultiplier * currentBet
+        credits += winnings
+        currentBet = 0
+        updateMainView()
     }
     
     
@@ -137,7 +176,7 @@ class ViewController: UIViewController
                 }
                 else
                 {
-                    slotImageView.image = UIImage(named: "Ace")
+                    slotImageView.image = UIImage(named: "Ace") // = viewDidLoad
                 }
                 
                 slotImageView.backgroundColor = UIColor.yellowColor()
@@ -251,9 +290,9 @@ class ViewController: UIViewController
     
     func removeSlotImageViews()
     {
-        if secondContainer != nil // = optional (nicht umbedingt notwendig)
+        if secondContainer != nil // = optional test
         {
-            let container: UIView? = secondContainer
+            let container: UIView? = secondContainer // = required test
             let subViews: Array? = container!.subviews
             for view in subViews!
             {
@@ -262,4 +301,36 @@ class ViewController: UIViewController
         }
     }
     
+    func hardReset()
+    {
+        removeSlotImageViews()
+        slots.removeAll(keepCapacity: true)
+        setupSecondContainer(secondContainer)
+        credits = 20
+        currentBet = 0
+        winnings = 0
+        
+        updateMainView()
+    }
+    
+    func updateMainView()
+    {
+        creditsLabel.text = String(credits)
+        betLabel.text = String(currentBet)
+        winnerPaidLabel.text = String(winnings)
+    }
+    
+    func showAlertWithText(header: String = "Warning", message: String)
+    {
+        var alert = UIAlertController(title: header, message: message, preferredStyle: UIAlertControllerStyle.Alert)
+        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
+        self.presentViewController(alert, animated: true, completion: nil)
+    }
 }
+
+
+
+
+
+
+
