@@ -73,6 +73,9 @@ class ViewController: UIViewController
     
     func betOneButtonPressed(button: UIButton)
     {
+        winnings = 0
+        updateMainView()
+        
         if credits <= 0
         {
             showAlertWithText(header: "No More Credits", message: "Reset Game")
@@ -94,6 +97,9 @@ class ViewController: UIViewController
     
     func betMaxButtonPressed(button: UIButton)
     {
+        winnings = 0
+        updateMainView()
+        
         if credits < 5
         {
             showAlertWithText(header: "Not Enought Credits", message: "Bet less!")
@@ -116,15 +122,22 @@ class ViewController: UIViewController
     
     func spinButtonPressed(button: UIButton)
     {
-        removeSlotImageViews()
-        slots = Factory.createSlots()
-        setupSecondContainer(secondContainer)
-        
-        var winningsMultiplier = SlotBrain.computeWinnings(slots)
-        winnings = winningsMultiplier * currentBet
-        credits += winnings
-        currentBet = 0
-        updateMainView()
+        if currentBet == 0
+        {
+            showAlertWithText(header: "Make your bet first!", message: "")
+        }
+        else
+        {
+            removeSlotImageViews()
+            slots = Factory.createSlots()
+            setupSecondContainer(secondContainer)
+            
+            var winningsMultiplier = SlotBrain.computeWinnings(slots)
+            winnings = winningsMultiplier * currentBet
+            credits += winnings
+            currentBet = 0
+            updateMainView()
+        }
     }
     
     
@@ -306,7 +319,7 @@ class ViewController: UIViewController
         removeSlotImageViews()
         slots.removeAll(keepCapacity: true)
         setupSecondContainer(secondContainer)
-        credits = 20
+        credits = 50
         currentBet = 0
         winnings = 0
         

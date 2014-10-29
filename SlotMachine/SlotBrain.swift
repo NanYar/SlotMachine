@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 
 class SlotBrain
@@ -56,25 +57,28 @@ class SlotBrain
         var straightWinCount = 0
         var threeOfAKindWinCount = 0
         
+        var index = 0
+        
         for slotRow in slotsInRows
         {
+            index++
             if checkFlush(slotRow) == true
             {
-                println("Flush")
+                println("Flush (Row \(index))")
                 winnings += 1
                 flushWinCount += 1
             }
             
             if checkThreeInARow(slotRow) == true
             {
-                println("Three in a Row")
+                println("Three in a Row (Row \(index))")
                 winnings += 1
                 straightWinCount += 1
             }
             
             if checkThreeOfAKind(slotRow) == true
             {
-                println("Three of a Kind")
+                println("Three of a Kind (Row \(index))")
                 winnings += 3
                 threeOfAKindWinCount += 1
             }
